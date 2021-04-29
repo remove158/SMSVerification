@@ -1,5 +1,5 @@
 const { google } = require("googleapis");
-`   `
+const JWT = require("jsonwebtoken");
 //-------------------------------------------------------------------------//
 // TODO : verify code with "verificationCode": "string", "sessionInfo": "string" 
 //-------------------------------------------------------------------------//
@@ -37,7 +37,7 @@ const generateJWT = async (phoneNumber) => {
 		sub: { phoneNumber: phoneNumber },
 		iat: new Date().getTime(),
 	};
-	return JWT.sign(payload, process.env.JWTSecret);
+	return JWT.sign(payload, process.env.JWTSecret); // <- put your JWT secret here !
 };
 
 
