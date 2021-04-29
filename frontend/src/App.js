@@ -3,12 +3,13 @@ import firebase from "./firebase/config";
 import axios from "axios";
 
 function App() {
-	const [state, setstate] = useState({ sessionInfo: "", phonNumber: ""  , code:""});
+	const [state, setstate] = useState({ sessionInfo: "", phoneNumber: ""  , code:""});
 
 	window.myCallback = useCallback(
 		async (recaptchaToken) => {
 			const url = "http://localhost:3001/sendSMS"; // <- put your endpoint here
-			const phoneNumber = "+66" + state.phonNumber.substring(1);
+			const phoneNumber = "+66" + state.phoneNumber.substring(1);
+            console.log(phoneNumber , recaptchaToken);
 			try {
 				const response = await axios.post(url, {
 					phoneNumber,
@@ -49,7 +50,7 @@ function App() {
 					label="phonenumber"
 					value={state.phonNumber}
 					onChange={(e) =>
-						setstate({ ...state, phonNumber: e.target.value })
+						setstate({ ...state, phoneNumber: e.target.value })
 					}
 				></input>
 				<button id="sendCode">Send SMS</button>
